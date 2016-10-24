@@ -86,7 +86,6 @@ public class MainActivity extends BaseActivity {
             finish();
         }
 
-
         final BluetoothManager bluetoothManager =
                 (BluetoothManager)getSystemService(BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
