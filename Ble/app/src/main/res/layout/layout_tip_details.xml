@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="150dp"
+    android:background="@color/colorBackBlue">
+
+    <TextView
+        android:id="@+id/tip_title"
+        android:layout_width="@dimen/tip_title_width"
+        android:layout_height="@dimen/tip_title_height"
+        android:text="@string/pm25_country_standard"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:background="@drawable/tip_main_rect_background"/>
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/tip_title"
+        android:layout_width="500dp"
+        android:layout_height="600dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <!--level1-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_1"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_1_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+
+        <!--level2-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_2"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_2_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+
+        <!--level3-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_3"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_3_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+
+        <!--level4-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_4"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_4_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+
+        <!--level5-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_5"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_5_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+
+        <!--level6-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tip_detail_every_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_6"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:text="@string/pm25_level_6_description"
+                android:textSize="@dimen/tip_detail_every_text_size"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="@dimen/tip_detail_every_line_width"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line"/>
+    </LinearLayout>
+
+</RelativeLayout>

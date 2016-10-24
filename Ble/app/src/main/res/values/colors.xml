@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackBlue">#2B8FFC</color>
+    <color name="wave_color">#AA2B8FFC</color>
+    <color name="colorNowMark">#FEFEFE</color>
+    <color name="colorNowStatus">#B3D7FE</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="blue_1">#2A90FA</color>
+    <color name="blue_2">#4DA1FC</color>
+    <color name="blue_3">#76B9FD</color>
+
+    <color name="output_report_text">#2B91FD</color>
+
+
+</resources>

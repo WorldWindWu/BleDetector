@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackBlue"
+    tools:context=".activity.MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/small_circle_left"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/small_circle_checked"/>
+
+        <Button
+            android:id="@+id/small_circle_right"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_toRightOf="@id/small_circle_left"
+            android:layout_alignBottom="@id/small_circle_left"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/small_circle_unchecked"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/value_battery"
+            android:textSize="20sp"
+            android:text="10%"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/small_circle_right"
+            android:layout_marginTop="27dp"
+            android:layout_marginLeft="18dp"/>
+
+        <!--电池显示-->
+        <com.zhijiatech.ble.view.BatteryStateView
+            android:id="@+id/battery"
+            android:layout_width="@dimen/battery_layout_width"
+            android:layout_height="@dimen/battery_layout_height"
+            android:layout_toRightOf="@id/value_battery"
+            android:layout_marginLeft="@dimen/battery_margin_left"
+            android:layout_marginTop="@dimen/battery_margin_top"/>
+
+        <!--右上角提示-->
+        <ImageButton
+            android:id="@+id/tip"
+            android:layout_width="@dimen/tip_layout_width"
+            android:layout_height="@dimen/tip_layout_height"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/tip_margin_right"
+            android:layout_marginTop="@dimen/tip_margin_top"
+            android:background="@drawable/tip"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/tip_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_tip_details"/>
+    </FrameLayout>
+</FrameLayout>

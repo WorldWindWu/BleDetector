@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LeftMainFragment">
+
+    <RelativeLayout
+        android:id="@+id/now_status_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackBlue">
+
+        <!--电池显示-->
+        <!--<com.zhijiatech.ble.view.BatteryStateView-->
+            <!--android:id="@+id/battery"-->
+            <!--android:layout_width="@dimen/battery_layout_width"-->
+            <!--android:layout_height="@dimen/battery_layout_height"-->
+            <!--android:layout_marginLeft="@dimen/battery_margin_left"-->
+            <!--android:layout_marginTop="@dimen/battery_margin_top"/>-->
+
+        <!--右上角提示-->
+        <!--<ImageButton-->
+            <!--android:id="@+id/tip"-->
+            <!--android:layout_width="@dimen/tip_layout_width"-->
+            <!--android:layout_height="@dimen/tip_layout_height"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/tip_margin_right"-->
+            <!--android:layout_marginTop="@dimen/tip_margin_top"-->
+            <!--android:background="@drawable/tip"/>-->
+
+        <!--中间的状态显示-->
+        <TextView
+            android:id="@+id/start_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/step1_opened_and_scaning"
+            android:textColor="@color/colorNowStatus"
+            android:textSize="@dimen/center_status_text_size"/>
+
+        <!--中间的状态显示-->
+        <ImageView
+            android:id="@+id/center_line"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/line"
+            android:visibility="gone"
+            />
+
+        <!--PM2.5图标-->
+        <TextView
+            android:id="@+id/now_pm25_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/now_pm25_mark_margin_bottom"
+            android:text="@string/pm25"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_mark_size"/>
+
+        <!--PM2.5数值-->
+        <TextView
+            android:id="@+id/now_pm25_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/now_pm25_value_margin_bottom"
+            android:text="@string/now_test_value"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_value_size"
+            android:textStyle="bold"/>
+
+        <!--PM2.5描述-->
+        <TextView
+            android:id="@+id/now_pm25_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/now_pm25_description_margin_bottom"
+            android:text="@string/now_test_description"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_description_size"/>
+
+        <!--CO2 mark-->
+        <TextView
+            android:id="@+id/now_co2_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/now_co2_mark_margin_top"
+            android:text="@string/co2"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_mark_size"/>
+
+        <!--CO2数值-->
+        <TextView
+            android:id="@+id/now_co2_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/now_co2_value_margin_top"
+            android:text="@string/now_test_value"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_value_size"
+            android:textStyle="bold"/>
+
+        <!--CO2描述-->
+        <TextView
+            android:id="@+id/now_co2_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/start_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/now_co2_description_margin_top"
+            android:text="@string/now_test_description"
+            android:textColor="@color/colorNowMark"
+            android:textSize="@dimen/now_description_size"/>
+    </RelativeLayout>
+</FrameLayout>

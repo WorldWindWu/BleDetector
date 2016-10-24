@@ -1,0 +1,38 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+
+    <dimen name="battery_layout_width">36dp</dimen>
+    <dimen name="battery_layout_height">20dp</dimen>
+    <dimen name="battery_margin_top">30dp</dimen>
+    <dimen name="battery_margin_left">10dp</dimen>
+
+    <dimen name="tip_layout_width">25dp</dimen>
+    <dimen name="tip_layout_height">25dp</dimen>
+    <dimen name="tip_margin_top">18dp</dimen>
+    <dimen name="tip_margin_right">30dp</dimen>
+
+    <dimen name="center_status_text_size">35sp</dimen>
+
+    <dimen name="now_mark_size">35sp</dimen>
+    <dimen name="now_value_size">80sp</dimen>
+    <dimen name="now_description_size">35sp</dimen>
+
+    <dimen name="now_pm25_mark_margin_bottom">220dp</dimen>
+    <dimen name="now_pm25_value_margin_bottom">120dp</dimen>
+    <dimen name="now_pm25_description_margin_bottom">70dp</dimen>
+    <dimen name="now_co2_mark_margin_top">80dp</dimen>
+    <dimen name="now_co2_value_margin_top">130dp</dimen>
+    <dimen name="now_co2_description_margin_top">240dp</dimen>
+
+    <dimen name="tip_title_width">320dp</dimen>
+    <dimen name="tip_title_height">60dp</dimen>
+
+    <dimen name="tip_detail_every_height">80dp</dimen>
+    <dimen name="tip_detail_every_text_size">32sp</dimen>
+
+    <dimen name="tip_detail_every_line_width">500dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="detect_type_text_size">40sp</dimen>
+</resources>

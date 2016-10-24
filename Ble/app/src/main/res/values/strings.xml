@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Ble</string>
+    <string name="step1_opened_and_scaning">蓝牙已打开，正在搜索检测宝</string>
+    <string name="step2_found_and_connecting">已搜索到设备，正在开始连接</string>
+    <string name="step3_connected_successfully">蓝牙已打开，正在搜索检测宝</string>
+    <string name="step4_warming_up">设备正在预热中</string>
+
+    <string name="pm25">PM2.5</string>
+    <string name="co2">CO2</string>
+
+    <string name="now_default_value">_ _</string>
+    <string name="now_default_description"></string>
+
+    <string name="now_test_value">500</string>
+    <string name="now_test_description">空气清新</string>
+
+    <string name="pm25_country_standard">PM2.5国家标准</string>
+
+    <!--PM2.5国家标准-->
+    <string name="pm25_level_1">0-12</string>
+    <string name="pm25_level_1_description">好</string>
+
+    <string name="pm25_level_2">12-35</string>
+    <string name="pm25_level_2_description">中等</string>
+
+    <string name="pm25_level_3">35-55</string>
+    <string name="pm25_level_3_description">对敏感人群不健康</string>
+
+    <string name="pm25_level_4">55-150</string>
+    <string name="pm25_level_4_description">不健康</string>
+
+    <string name="pm25_level_5">150-250</string>
+    <string name="pm25_level_5_description">非常不健康</string>
+
+    <string name="pm25_level_6">251-</string>
+    <string name="pm25_level_6_description">有毒害</string>
+
+    <string name="output_report">导出报告</string>
+
+    <string name="detect_type_1">空气室外检测</string>
+    <string name="detect_type_2">净化效率检测</string>
+    <string name="detect_type_3">PM2.5持续检测</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
