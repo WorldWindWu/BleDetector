@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/value_battery"
             android:textSize="20sp"
-            android:text="10%"
+            android:text="100%"
             android:textColor="@color/white"
             android:layout_toRightOf="@id/small_circle_right"
             android:layout_marginTop="27dp"

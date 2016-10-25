@@ -30,6 +30,7 @@ public class SampleGattAttributes {
     public static String VALUE_CO2_MEASUREMENT         = "00001003-0000-1000-8000-00805f9b34fb";
     public static String VALUE_BATTERY_MEASUREMENT     = "00001005-0000-1000-8000-00805f9b34fb";
     public static String DEVICE_STATE_MEASUREMENT      = "00001007-0000-1000-8000-00805f9b34fb";
+    public static String NOTIFY_SERIAL_DATA            = "00001009-0000-1000-8000-00805f9b34fb";
 
     static {
         // Sample Services.
@@ -41,6 +42,7 @@ public class SampleGattAttributes {
         attributes.put(VALUE_PM25_MEASUREMENT, "Value Pm25 Measurement");
         attributes.put(VALUE_BATTERY_MEASUREMENT, "Value Battery Measurement");
         attributes.put(DEVICE_STATE_MEASUREMENT, "Device State Measurement");
+        attributes.put(NOTIFY_SERIAL_DATA, "Serial Data");
 
         attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
     }

@@ -33,8 +33,9 @@
             android:theme="@style/JK.SwipeBack.Transparent.Theme">
         </activity>
         <activity android:name=".activity.CoveredAreaActivity">
-
         </activity>
+
+        <service android:name=".ble.BLEService" android:enabled="true"/>
     </application>
 
 </manifest>

@@ -32,18 +32,18 @@
 
         <!--中间的状态显示-->
         <TextView
-            android:id="@+id/start_status"
+            android:id="@+id/now_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/step1_opened_and_scaning"
+            android:text="@string/step0_unopened"
             android:textColor="@color/colorNowStatus"
             android:textSize="@dimen/center_status_text_size"/>
 
         <!--中间的状态显示-->
         <ImageView
             android:id="@+id/center_line"
-            android:layout_width="200dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/line"
@@ -55,7 +55,7 @@
             android:id="@+id/now_pm25_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/start_status"
+            android:layout_above="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/now_pm25_mark_margin_bottom"
             android:text="@string/pm25"
@@ -67,10 +67,10 @@
             android:id="@+id/now_pm25_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/start_status"
+            android:layout_above="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/now_pm25_value_margin_bottom"
-            android:text="@string/now_test_value"
+            android:text="@string/now_default_value"
             android:textColor="@color/colorNowMark"
             android:textSize="@dimen/now_value_size"
             android:textStyle="bold"/>
@@ -80,10 +80,9 @@
             android:id="@+id/now_pm25_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/start_status"
+            android:layout_above="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/now_pm25_description_margin_bottom"
-            android:text="@string/now_test_description"
             android:textColor="@color/colorNowMark"
             android:textSize="@dimen/now_description_size"/>
 
@@ -92,7 +91,7 @@
             android:id="@+id/now_co2_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/start_status"
+            android:layout_below="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/now_co2_mark_margin_top"
             android:text="@string/co2"
@@ -104,10 +103,10 @@
             android:id="@+id/now_co2_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/start_status"
+            android:layout_below="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/now_co2_value_margin_top"
-            android:text="@string/now_test_value"
+            android:text="@string/now_default_value"
             android:textColor="@color/colorNowMark"
             android:textSize="@dimen/now_value_size"
             android:textStyle="bold"/>
@@ -117,10 +116,9 @@
             android:id="@+id/now_co2_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/start_status"
+            android:layout_below="@id/now_status"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/now_co2_description_margin_top"
-            android:text="@string/now_test_description"
             android:textColor="@color/colorNowMark"
             android:textSize="@dimen/now_description_size"/>
     </RelativeLayout>

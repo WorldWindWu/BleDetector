@@ -1,12 +1,15 @@
 package com.zhijiatech.bledetector.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhijiatech.bledetector.R;
+import com.zhijiatech.bledetector.ble.BLEReceiver;
 
 import java.lang.reflect.Field;
 
@@ -17,10 +20,61 @@ public abstract class BaseActivity extends FragmentActivity implements SlidingPa
 
     public final static String TAG = BaseActivity.class.getCanonicalName();
 
+    public BLEReceiver mBLEReceiver;
+
+    public Handler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
+        register();
+        init();
+        initHandler();
+    }
+
+    public abstract void init();
+    public abstract void register();
+
+    public abstract void baseHandleMessage(Message msg);
+
+    public void unRegister(){
+        if (null != mBLEReceiver)
+        {
+            unregisterReceiver(mBLEReceiver);
+        }
+    }
+
+    public void sendHandlerMessage(int what, Object object)
+    {
+        if (mHandler == null)
+        {
+            return;
+        }
+        Message msg = mHandler.obtainMessage(what, object);
+        mHandler.sendMessage(msg);
+    }
+
+    private void initHandler()
+    {
+        mHandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                switch (msg.what)
+                {
+                    default:
+                        baseHandleMessage(msg);
+                        break;
+                }
+            }
+        };
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unRegister();
     }
 
     /**

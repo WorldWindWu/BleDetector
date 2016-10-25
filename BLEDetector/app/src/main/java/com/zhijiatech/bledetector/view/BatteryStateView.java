@@ -21,7 +21,7 @@ public class BatteryStateView extends View {
     private float mWidth;
     private float mHeight;
     private Paint mPaint;
-    private float mPowerQuantity = 0.2f;
+    private float mPowerQuantity = 1.0f;
 
     public float getPowerQuantity() {
         return mPowerQuantity;

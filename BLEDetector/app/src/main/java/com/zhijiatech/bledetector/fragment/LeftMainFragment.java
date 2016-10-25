@@ -23,6 +23,7 @@ public class LeftMainFragment extends Fragment {
 
     private TextView mNowCo2ValueTextView;
     private TextView mNowCo2DescriptionTextView;
+    private TextView mNowStatusTextView;
 
     private ImageView mCenterLineImageView;
 
@@ -47,7 +48,6 @@ public class LeftMainFragment extends Fragment {
     }
 
     public void initComponent(View view) {
-
         mNowPm25ValueTextView = (TextView) view.findViewById(R.id.now_pm25_value);
         mNowPm25DescriptionTextView = (TextView) view.findViewById(R.id.now_pm25_description);
 
@@ -55,8 +55,26 @@ public class LeftMainFragment extends Fragment {
         mNowCo2DescriptionTextView = (TextView) view.findViewById(R.id.now_co2_description);
 
         mCenterLineImageView = (ImageView) view.findViewById(R.id.center_line);
-
+        mNowStatusTextView = (TextView) view.findViewById(R.id.now_status);
         mNowStatusLayout = (RelativeLayout) view.findViewById(R.id.now_status_layout);
+    }
 
+    public void refreshNowPm25Value(String value){
+        mNowPm25ValueTextView.setText(value+"");
+        mNowPm25ValueTextView.invalidate();
+    }
+
+    public void refreshNowCO2Value(String value){
+        mNowCo2ValueTextView.setText(value+"");
+        mNowCo2ValueTextView.invalidate();
+    }
+
+    public void refreshNowStatus(String value){
+        mNowStatusTextView.setText(value+"");
+        mNowStatusTextView.invalidate();
+    }
+
+    public void setNowStatusTextViewInVisible(){
+        mNowStatusTextView.setVisibility(View.INVISIBLE);
     }
 }

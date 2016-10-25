@@ -1,26 +1,21 @@
 package com.zhijiatech.bledetector.ble;
 
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.content.Context;
+import android.content.Intent;
+
+import com.zhijiatech.bledetector.MainLogic.MainLogic;
+
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Created by Jiafeng on 2016/10/17.
  */
 public class BleUtil {
-    public static String bytesToHexString(byte[] src) {
-        StringBuilder stringBuilder = new StringBuilder("");
-        if (src == null || src.length <= 0) {
-            return null;
-        }
-
-        int v = 0;
-        for (int i = 0; i < src.length; i++) {
-            v = src[i] & 0xFF;
-            String hv = Integer.toHexString(v);
-            if (hv.length() < 2) {
-                stringBuilder.append(0);
-            }
-            stringBuilder.append(hv);
-        }
-        return stringBuilder.toString();
-    }
+    private static final String LIST_NAME = "NAME";
+    private static final String LIST_UUID = "UUID";
 
     /**
      * 20.    * byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用
@@ -32,14 +27,44 @@ public class BleUtil {
         return value;
     }
 
-    public static String ByteArraytoHex(byte[] bytes) {
-        if(bytes!=null){
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes) {
-                sb.append(String.format("%02X ", b));
-            }
-            return sb.toString();
+    public static void parse(byte[] data, UUID uuid, Context context){
+        if (uuid.equals(UUID.fromString(SampleGattAttributes.VALUE_PM25_MEASUREMENT))){
+            MainLogic.getInstance().setValuePM25(bytesToInt2(data));
+            context.sendBroadcast(new Intent(BLEReceiver.ACTION_GET_DATA_PM25));
         }
-        return "";
+        else if(uuid.equals(UUID.fromString(SampleGattAttributes.VALUE_CO2_MEASUREMENT))){
+            MainLogic.getInstance().setValueCO2(bytesToInt2(data));
+            context.sendBroadcast(new Intent(BLEReceiver.ACTION_GET_DATA_CO2));
+        }
+        else if(uuid.equals(UUID.fromString(SampleGattAttributes.VALUE_BATTERY_MEASUREMENT))){
+            MainLogic.getInstance().setBleBattery(bytesToInt2(data));
+            context.sendBroadcast(new Intent(BLEReceiver.ACTION_GET_DATA_BATTERY));
+        }
+    }
+
+    public static void displayGattServices(List<BluetoothGattService> gattServices) {
+        if (gattServices == null) return;
+        String uuid = null;
+         // Loops through available GATT Services.
+        for (BluetoothGattService gattService : gattServices) {
+            List<BluetoothGattCharacteristic> gattCharacteristics =
+                    gattService.getCharacteristics();
+
+            // Loops through available Characteristics.
+            for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
+                uuid = gattCharacteristic.getUuid().toString();
+                if (uuid.equals(SampleGattAttributes.VALUE_PM25_MEASUREMENT)){
+                    MainLogic.getInstance().setBluetoothGattCharacteristicPm25(gattCharacteristic);
+                }else if (uuid.equals(SampleGattAttributes.VALUE_CO2_MEASUREMENT)){
+                    MainLogic.getInstance().setBluetoothGattCharacteristicCo2(gattCharacteristic);
+                }else if (uuid.equals(SampleGattAttributes.VALUE_BATTERY_MEASUREMENT)){
+                    MainLogic.getInstance().setBluetoothGattCharacteristicBattery(gattCharacteristic);
+                }else if (uuid.equals(SampleGattAttributes.DEVICE_STATE_MEASUREMENT)){
+                    MainLogic.getInstance().setBluetoothGattCharacteristicState(gattCharacteristic);
+                }else if (uuid.equals(SampleGattAttributes.NOTIFY_SERIAL_DATA)){
+                    MainLogic.getInstance().setBluetoothGattCharacteristicNotify(gattCharacteristic);
+                }
+            }
+        }
     }
 }

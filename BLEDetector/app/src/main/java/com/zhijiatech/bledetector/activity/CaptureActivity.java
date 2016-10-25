@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -99,6 +100,21 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         animation.setRepeatCount(-1);
         animation.setRepeatMode(Animation.RESTART);
         scanLine.startAnimation(animation);
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void register() {
+
+    }
+
+    @Override
+    public void baseHandleMessage(Message msg) {
+
     }
 
     @Override

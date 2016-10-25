@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">Ble</string>
-    <string name="step1_opened_and_scaning">蓝牙已打开，正在搜索检测宝</string>
-    <string name="step2_found_and_connecting">已搜索到设备，正在开始连接</string>
-    <string name="step3_connected_successfully">蓝牙已打开，正在搜索检测宝</string>
-    <string name="step4_warming_up">设备正在预热中</string>
+
+    <string name="step0_unopened">努力开启蓝牙中...</string>
+    <string name="step1_opened_and_scaning">蓝牙已打开，正在搜索检测宝...</string>
+    <string name="step2_found_and_connecting">已搜索到设备，正在开始连接...</string>
+    <string name="step3_connected_successfully">连接成功!</string>
+    <string name="step4_warming_up">设备正在预热中...</string>
 
     <string name="pm25">PM2.5</string>
     <string name="co2">CO2</string>
 
-    <string name="now_default_value">_ _</string>
+    <string name="now_default_value">--</string>
     <string name="now_default_description"></string>
 
     <string name="now_test_value">500</string>
@@ -43,5 +45,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="alert_message_exit">   您准备要退出该应用吗？</string>
+    <string name="alert_message_exit_title">蓝牙检测仪APP--退出提醒</string>
+    <string name="alert_message_exit_ok">确定</string>
+    <string name="alert_message_exit_cancel">取消</string>
 
 </resources>

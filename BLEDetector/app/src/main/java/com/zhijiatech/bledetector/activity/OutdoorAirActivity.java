@@ -1,6 +1,7 @@
 package com.zhijiatech.bledetector.activity;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,21 @@ public class OutdoorAirActivity extends BaseActivity {
         mDetaHeight = (ScreenUtils.getScreenHeight(this)*9.0f/10.0f)/3000.0f;
         mWaveHeightIndex=0;
         initComponents();
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void register() {
+
+    }
+
+    @Override
+    public void baseHandleMessage(Message msg) {
+
     }
 
     private void startTimer() {
