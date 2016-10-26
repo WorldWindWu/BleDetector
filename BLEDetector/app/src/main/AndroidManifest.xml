@@ -5,9 +5,11 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
@@ -17,8 +19,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"
-        android:launchMode="singleTask">
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,19 +29,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTask"
-            android:name=".activity.OutdoorAirActivity"
-            android:theme="@style/JK.SwipeBack.Transparent.Theme">
-        </activity>
-        <activity
-            android:launchMode="singleTask"
             android:name=".activity.CaptureActivity"
+            android:launchMode="singleTask"
             android:theme="@style/JK.SwipeBack.Transparent.Theme">
         </activity>
         <activity android:name=".activity.CoveredAreaActivity">
         </activity>
+        <activity
+            android:name=".activity.NormalDetectActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/JK.SwipeBack.Transparent.Theme">
+        </activity>
 
-        <service android:name=".ble.BLEService" android:enabled="true"/>
+        <service
+            android:name=".ble.BLEService"
+            android:enabled="true"/>
+        <activity android:name=".activity.ContinuousDetectActivity"
+                  android:launchMode="singleTask"
+                  android:theme="@style/JK.SwipeBack.Transparent.Theme">
+        </activity>
     </application>
 
 </manifest>

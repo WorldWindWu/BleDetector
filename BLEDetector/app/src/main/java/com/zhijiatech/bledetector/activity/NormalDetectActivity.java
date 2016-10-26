@@ -7,7 +7,6 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,7 +23,6 @@ import com.zhijiatech.bledetector.util.DescriptionUtil;
 import com.zhijiatech.bledetector.util.MathUtils;
 import com.zhijiatech.bledetector.util.ScreenUtils;
 import com.zhijiatech.bledetector.view.LineWave;
-import com.zhijiatech.bledetector.view.PopupButton;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -33,25 +31,24 @@ import java.util.TimerTask;
 import static com.zhijiatech.bledetector.constant.MConstants.REFRESH.O_START_TIMER;
 import static com.zhijiatech.bledetector.constant.MConstants.REFRESH.O_STOP_TIMER;
 
-public class OutdoorAirActivity extends BaseActivity {
-    private Button mButtonOutdoorDetect;
-    private Button mButtonOutdoorStopDetect;
-    private PopupButton mPopupButton;
-    private LinearLayout mLinearLayoutDetectOutdoorBg;
-    private View mViewParent;
+public class NormalDetectActivity extends BaseActivity {
+    private Button mBtNormalStartDetect;
+    private Button mBtNormalStopDetect;
+    private LinearLayout mLlPreDetect;
     private Timer mStartTimer, mStopTimer;
-    private float mDetaHeight;
+    private float mDeltaHeight;
     private int mWaveHeightIndex;
-    private TextView mTextViewTimer;
+    private TextView mTvTimer;
     private LineWave mTimerWave;
-    private RelativeLayout mLayoutOutdoorFinished;
-    private ImageButton mImageButtonBack1, mImageButtonBack2;
-    private Button mButtonReDetect;
+    private RelativeLayout mRlNormalDetectFinish;
+    private ImageButton mIbBackArrowPre, mIbBackArrowFinish;
+    private Button mBtRedoDetect;
 
-    private TextView mValuePM25TextView;
-    private TextView mValueCO2TextView;
-    private TextView mDesPM25TextView;
-    private TextView mDesCO2TextView;
+    private TextView mTvValuePm25;
+    private TextView mTvValueCo2;
+    private TextView mTvDesPm25;
+    private TextView mTvDesCo2;
+    private TextView mTvPreDetectTypeName,mTvDetectFinishTypeName;
 
     private BLEService mBLEService;
 
@@ -63,6 +60,8 @@ public class OutdoorAirActivity extends BaseActivity {
 
     private int mCountPm25 = 0;
     private int mCountCo2 = 0;
+
+    private String mDetectType;
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
@@ -90,13 +89,13 @@ public class OutdoorAirActivity extends BaseActivity {
     }
 
     private void initData() {
-        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        mViewParent = layoutInflater.inflate(R.layout.activity_outdoor_air, null);
-        setContentView(R.layout.activity_outdoor_air);
-        mDetaHeight = (ScreenUtils.getScreenHeight(this) * 9.0f / 10.0f) / 3000.0f;
+        setContentView(R.layout.activity_normal_detect);
+        mDeltaHeight = (ScreenUtils.getScreenHeight(this) * 9.0f / 10.0f) / 3000.0f;
         mWaveHeightIndex = 0;
         mValuePM25List = new ArrayList<>();
         mValueCO2List = new ArrayList<>();
+        Intent intent =getIntent();
+        mDetectType = intent.getStringExtra("normal_detect_type");
     }
 
     @Override
@@ -126,20 +125,20 @@ public class OutdoorAirActivity extends BaseActivity {
                         mBLEService.readCharacteristic(MainLogic.getInstance().getBluetoothGattCharacteristicCo2());
                     }
 
-                    mTimerWave.setWaveHeight(mDetaHeight * (mWaveHeightIndex++));
-                    mTextViewTimer.setText("" + mWaveHeightIndex / 100);
+                    mTimerWave.setWaveHeight(mDeltaHeight * (mWaveHeightIndex++));
+                    mTvTimer.setText("" + mWaveHeightIndex / 100);
                 } else {
                     clearStartTimer();
                     calculateValue();
-                    mLayoutOutdoorFinished.setVisibility(View.VISIBLE);
+                    mRlNormalDetectFinish.setVisibility(View.VISIBLE);
                     updateView();
                 }
                 break;
 
             case O_STOP_TIMER:
                 if (mWaveHeightIndex > 0) {
-                    mTimerWave.setWaveHeight(mDetaHeight * (mWaveHeightIndex -= 2));
-                    mTextViewTimer.setText("" + mWaveHeightIndex / 50);
+                    mTimerWave.setWaveHeight(mDeltaHeight * (mWaveHeightIndex -= 2));
+                    mTvTimer.setText("" + mWaveHeightIndex / 50);
                 } else {
                     clearStopTimer();
                 }
@@ -160,10 +159,10 @@ public class OutdoorAirActivity extends BaseActivity {
     }
 
     private void updateView() {
-        mValuePM25TextView.setText(mValuePm25+"");
-        mValueCO2TextView.setText(mValueCo2+"");
-        mDesPM25TextView.setText(DescriptionUtil.despPm25(mValuePm25));
-        mDesCO2TextView.setText(DescriptionUtil.despCO2(mValueCo2));
+        mTvValuePm25.setText(mValuePm25+"");
+        mTvValueCo2.setText(mValueCo2+"");
+        mTvDesPm25.setText(DescriptionUtil.despPm25(mValuePm25));
+        mTvDesCo2.setText(DescriptionUtil.despCO2(mValueCo2));
     }
 
     private void calculateValue() {
@@ -206,70 +205,81 @@ public class OutdoorAirActivity extends BaseActivity {
     }
 
     private void initComponents() {
-        mImageButtonBack1 = (ImageButton) findViewById(R.id.detecting_outdoor_back);
-        mImageButtonBack2 = (ImageButton) findViewById(R.id.detected_outdoor_back);
-        mButtonReDetect = (Button) findViewById(R.id.outdoor_re_detect);
+        mTvPreDetectTypeName = (TextView) findViewById(R.id.tv_pre_normal_detect_type_name);
+        mTvDetectFinishTypeName = (TextView) findViewById(R.id.tv_normal_detect_finish_type_name);
 
-        mImageButtonBack1.setOnClickListener(new View.OnClickListener() {
+        if (getResources().getString(R.string.detect_type_o_en).equals(mDetectType)){
+            mTvPreDetectTypeName.setText(getResources().getString(R.string.detect_type_1));
+            mTvDetectFinishTypeName.setText(getResources().getString(R.string.detect_type_1));
+        }
+        else if (getResources().getString(R.string.detect_type_i_en).equals(mDetectType)){
+            mTvPreDetectTypeName.setText(getResources().getString(R.string.detect_type_2));
+            mTvDetectFinishTypeName.setText(getResources().getString(R.string.detect_type_2));
+        }
+        mIbBackArrowPre = (ImageButton) findViewById(R.id.ib_normal_detect_back_arrow);
+        mIbBackArrowFinish = (ImageButton) findViewById(R.id.iv_normal_detect_finish_back_arrow);
+        mBtRedoDetect = (Button) findViewById(R.id.outdoor_redo_normal_detect);
+
+        mIbBackArrowPre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
 
-        mImageButtonBack2.setOnClickListener(new View.OnClickListener() {
+        mIbBackArrowFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
 
-        mButtonReDetect.setOnClickListener(new View.OnClickListener() {
+        mBtRedoDetect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mWaveHeightIndex = 0;
                 clearData();
                 startTimer();
-                mLayoutOutdoorFinished.setVisibility(View.GONE);
+                mRlNormalDetectFinish.setVisibility(View.GONE);
             }
         });
 
-        mLayoutOutdoorFinished = (RelativeLayout) findViewById(R.id.layout_outdoor_air_finished);
-        mTextViewTimer = (TextView) findViewById(R.id.timer_count);
-        mLinearLayoutDetectOutdoorBg = (LinearLayout) findViewById(R.id.detect_outdoor_bg);
+        mRlNormalDetectFinish = (RelativeLayout) findViewById(R.id.rl_layout_detect_finish);
+        mTvTimer = (TextView) findViewById(R.id.tv_normal_detect_timer_count);
+        mLlPreDetect = (LinearLayout) findViewById(R.id.ll_pre_detect_bg);
 
-        mButtonOutdoorDetect = (Button) findViewById(R.id.outdoor_detect_button);
-        mButtonOutdoorStopDetect = (Button) findViewById(R.id.outdoor_stop_detect_button);
+        mBtNormalStartDetect = (Button) findViewById(R.id.bt_normal_detect_button);
+        mBtNormalStopDetect = (Button) findViewById(R.id.bt_stop_normal_detect_button);
 
-        mButtonOutdoorDetect.setOnClickListener(new View.OnClickListener() {
+        mBtNormalStartDetect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mButtonOutdoorStopDetect.setVisibility(View.VISIBLE);
-                mLinearLayoutDetectOutdoorBg.setVisibility(View.GONE);
-                mTextViewTimer.setVisibility(View.VISIBLE);
+                mBtNormalStopDetect.setVisibility(View.VISIBLE);
+                mLlPreDetect.setVisibility(View.GONE);
+                mTvTimer.setVisibility(View.VISIBLE);
                 clearData();
                 startTimer();
             }
         });
 
-        mButtonOutdoorStopDetect.setOnClickListener(new View.OnClickListener() {
+        mBtNormalStopDetect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLinearLayoutDetectOutdoorBg.setVisibility(View.VISIBLE);
-                mButtonOutdoorStopDetect.setVisibility(View.GONE);
-                mTextViewTimer.setVisibility(View.GONE);
+                mLlPreDetect.setVisibility(View.VISIBLE);
+                mBtNormalStopDetect.setVisibility(View.GONE);
+                mTvTimer.setVisibility(View.GONE);
                 clearData();
                 stopTimer();
                 mStartTimer.cancel();
             }
         });
 
-        mTimerWave = (LineWave) findViewById(R.id.time_wave);
+        mTimerWave = (LineWave) findViewById(R.id.lw_time_wave);
 
-        mValuePM25TextView=(TextView) findViewById(R.id.value_pm25);
-        mValueCO2TextView=(TextView) findViewById(R.id.value_co2);
-        mDesPM25TextView=(TextView) findViewById(R.id.desp_pm25);
-        mDesCO2TextView=(TextView) findViewById(R.id.desp_co2);
+        mTvValuePm25 =(TextView) findViewById(R.id.tv_normal_detect_finish_value_pm25);
+        mTvValueCo2 =(TextView) findViewById(R.id.tv_normal_detect_finish_value_co2);
+        mTvDesPm25 =(TextView) findViewById(R.id.tv_normal_detect_finish_description_pm25);
+        mTvDesCo2 =(TextView) findViewById(R.id.tv_normal_detect_finish_description_co2);
     }
 
     private void clearData() {

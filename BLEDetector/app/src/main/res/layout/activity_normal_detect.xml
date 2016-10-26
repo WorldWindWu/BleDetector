@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".activity.OutdoorAirActivity">
+    tools:context=".activity.NormalDetectActivity">
 
     <RelativeLayout
-        android:id="@+id/layout_outdoor_air_finished"
+        android:id="@+id/rl_layout_detect_finish"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/activity_out_air_finished"></include>
+        <include layout="@layout/activity_normal_detect_finish"></include>
     </RelativeLayout>
 
     <FrameLayout
@@ -22,7 +22,7 @@
         android:layout_weight="9">
 
         <LinearLayout
-            android:id="@+id/detect_outdoor_bg"
+            android:id="@+id/ll_pre_detect_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -33,7 +33,7 @@
                 android:layout_weight="1">
 
                 <ImageButton
-                    android:id="@+id/detecting_outdoor_back"
+                    android:id="@+id/ib_normal_detect_back_arrow"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
@@ -41,11 +41,11 @@
                     android:background="@drawable/backspace_black"/>
 
                 <TextView
+                    android:id="@+id/tv_pre_normal_detect_type_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="32dp"
-                    android:text="室外空气检测"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                 />
@@ -57,33 +57,34 @@
                 android:layout_weight="8">
 
                 <ImageView
-                    android:id="@+id/outdoor_bg"
+                    android:id="@+id/iv_pre_normal_detect_bg"
                     android:layout_width="400dp"
                     android:layout_height="400dp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/outdoor"
-                    />
+                />
 
                 <TextView
-                    android:id="@+id/outdoor_tip1"
+                    android:id="@+id/tv_pre_normal_detect_tip1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/outdoor_bg"
+                    android:layout_below="@+id/iv_pre_normal_detect_bg"
                     android:layout_centerHorizontal="true"
                     android:text="检测前"
                     android:textColor="@color/blue_3"
                     android:textSize="30sp"
-                    />
+                />
 
                 <TextView
+                    android:id="@+id/tv_pre_normal_detect_tip2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/outdoor_tip1"
+                    android:layout_below="@+id/tv_pre_normal_detect_tip1"
                     android:layout_centerHorizontal="true"
                     android:text="请把检测仪放到室外"
                     android:textColor="@color/blue_3"
                     android:textSize="30sp"
-                    />
+                />
             </RelativeLayout>
 
         </LinearLayout>
@@ -93,7 +94,7 @@
             android:layout_height="match_parent">
 
             <com.zhijiatech.bledetector.view.LineWave
-                android:id="@+id/time_wave"
+                android:id="@+id/lw_time_wave"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </FrameLayout>
@@ -103,7 +104,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/timer_count"
+                android:id="@+id/tv_normal_detect_timer_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -121,7 +122,7 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/outdoor_detect_button"
+            android:id="@+id/bt_normal_detect_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/button_ripple_1"
@@ -129,7 +130,7 @@
             android:textSize="25sp"/>
 
         <Button
-            android:id="@+id/outdoor_stop_detect_button"
+            android:id="@+id/bt_stop_normal_detect_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/white_button"
@@ -137,7 +138,9 @@
             android:textColor="@android:color/black"
             android:textSize="25sp"
             android:visibility="gone"
-            />
+        />
     </FrameLayout>
 
 </LinearLayout>
+
+

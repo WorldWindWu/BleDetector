@@ -11,7 +11,8 @@ import android.widget.FrameLayout;
 
 import com.zhijiatech.bledetector.R;
 import com.zhijiatech.bledetector.activity.CaptureActivity;
-import com.zhijiatech.bledetector.activity.OutdoorAirActivity;
+import com.zhijiatech.bledetector.activity.ContinuousDetectActivity;
+import com.zhijiatech.bledetector.activity.NormalDetectActivity;
 import com.zhijiatech.bledetector.view.ReportPopupWindow;
 
 
@@ -38,7 +39,8 @@ public class RightMainFragment extends Fragment {
         mDetectTypeButton_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_1 = new Intent(getActivity(), OutdoorAirActivity.class);
+                Intent intent_1 = new Intent(getActivity(), NormalDetectActivity.class);
+                intent_1.putExtra("normal_detect_type","outdoor");
                 startActivity(intent_1);
             }
         });
@@ -46,7 +48,8 @@ public class RightMainFragment extends Fragment {
         mDetectTypeButton_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_2 = new Intent(getActivity(), OutdoorAirActivity.class);
+                Intent intent_2 = new Intent(getActivity(), NormalDetectActivity.class);
+                intent_2.putExtra("normal_detect_type","indoor");
                 startActivity(intent_2);
             }
         });
@@ -54,7 +57,7 @@ public class RightMainFragment extends Fragment {
         mDetectTypeButton_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_3 = new Intent(getActivity(), OutdoorAirActivity.class);
+                Intent intent_3 = new Intent(getActivity(), ContinuousDetectActivity.class);
                 startActivity(intent_3);
             }
         });
