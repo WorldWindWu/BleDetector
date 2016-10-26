@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhijiatech.bledetector.R;
+import com.zhijiatech.bledetector.util.DescriptionUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +30,12 @@ public class LeftMainFragment extends Fragment {
     private ImageView mCenterLineImageView;
 
     private RelativeLayout mNowStatusLayout;
+
+    public FrameLayout getFrameLayout() {
+        return mFrameLayout;
+    }
+
+    private FrameLayout mFrameLayout;
 
     public LeftMainFragment() {
         // Required empty public constructor
@@ -57,21 +65,21 @@ public class LeftMainFragment extends Fragment {
         mCenterLineImageView = (ImageView) view.findViewById(R.id.center_line);
         mNowStatusTextView = (TextView) view.findViewById(R.id.now_status);
         mNowStatusLayout = (RelativeLayout) view.findViewById(R.id.now_status_layout);
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.fragment_left);
     }
 
-    public void refreshNowPm25Value(String value){
+    public void refreshNowPm25Value(int value){
         mNowPm25ValueTextView.setText(value+"");
-        mNowPm25ValueTextView.invalidate();
+        mNowPm25DescriptionTextView.setText(DescriptionUtil.despPm25(value));
     }
 
-    public void refreshNowCO2Value(String value){
+    public void refreshNowCO2Value(int value){
         mNowCo2ValueTextView.setText(value+"");
-        mNowCo2ValueTextView.invalidate();
+        mNowCo2DescriptionTextView.setText(DescriptionUtil.despCO2(value));
     }
 
     public void refreshNowStatus(String value){
         mNowStatusTextView.setText(value+"");
-        mNowStatusTextView.invalidate();
     }
 
     public void setNowStatusTextViewInVisible(){

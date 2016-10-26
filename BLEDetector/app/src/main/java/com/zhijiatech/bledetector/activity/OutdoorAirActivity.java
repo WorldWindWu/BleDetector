@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.zhijiatech.bledetector.R;
 import com.zhijiatech.bledetector.ble.BLEReceiver;
 import com.zhijiatech.bledetector.ble.BLEService;
 import com.zhijiatech.bledetector.constant.MConstants;
+import com.zhijiatech.bledetector.util.DescriptionUtil;
 import com.zhijiatech.bledetector.util.MathUtils;
 import com.zhijiatech.bledetector.util.ScreenUtils;
 import com.zhijiatech.bledetector.view.LineWave;
@@ -93,6 +95,8 @@ public class OutdoorAirActivity extends BaseActivity {
         setContentView(R.layout.activity_outdoor_air);
         mDetaHeight = (ScreenUtils.getScreenHeight(this) * 9.0f / 10.0f) / 3000.0f;
         mWaveHeightIndex = 0;
+        mValuePM25List = new ArrayList<>();
+        mValueCO2List = new ArrayList<>();
     }
 
     @Override
@@ -125,7 +129,7 @@ public class OutdoorAirActivity extends BaseActivity {
                     mTimerWave.setWaveHeight(mDetaHeight * (mWaveHeightIndex++));
                     mTextViewTimer.setText("" + mWaveHeightIndex / 100);
                 } else {
-                    mStartTimer.cancel();
+                    clearStartTimer();
                     calculateValue();
                     mLayoutOutdoorFinished.setVisibility(View.VISIBLE);
                     updateView();
@@ -137,7 +141,7 @@ public class OutdoorAirActivity extends BaseActivity {
                     mTimerWave.setWaveHeight(mDetaHeight * (mWaveHeightIndex -= 2));
                     mTextViewTimer.setText("" + mWaveHeightIndex / 50);
                 } else {
-                    mStopTimer.cancel();
+                    clearStopTimer();
                 }
                 break;
 
@@ -158,6 +162,8 @@ public class OutdoorAirActivity extends BaseActivity {
     private void updateView() {
         mValuePM25TextView.setText(mValuePm25+"");
         mValueCO2TextView.setText(mValueCo2+"");
+        mDesPM25TextView.setText(DescriptionUtil.despPm25(mValuePm25));
+        mDesCO2TextView.setText(DescriptionUtil.despCO2(mValueCo2));
     }
 
     private void calculateValue() {
@@ -166,9 +172,6 @@ public class OutdoorAirActivity extends BaseActivity {
     }
 
     private void startTimer() {
-        mValuePM25List = new ArrayList<>();
-        mValueCO2List = new ArrayList<>();
-
         mStartTimer = new Timer();
         mStartTimer.schedule(new TimerTask() {
             @Override
@@ -186,6 +189,20 @@ public class OutdoorAirActivity extends BaseActivity {
                 mHandler.sendEmptyMessage(O_STOP_TIMER);
             }
         }, 0, 1);
+    }
+
+    private void clearStartTimer(){
+        if (mStartTimer!=null){
+            mStartTimer.cancel();
+            mStartTimer = null;
+        }
+    }
+
+    private void clearStopTimer(){
+        if (mStopTimer!=null){
+            mStopTimer.cancel();
+            mStopTimer=null;
+        }
     }
 
     private void initComponents() {
@@ -211,6 +228,7 @@ public class OutdoorAirActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 mWaveHeightIndex = 0;
+                clearData();
                 startTimer();
                 mLayoutOutdoorFinished.setVisibility(View.GONE);
             }
@@ -229,6 +247,7 @@ public class OutdoorAirActivity extends BaseActivity {
                 mButtonOutdoorStopDetect.setVisibility(View.VISIBLE);
                 mLinearLayoutDetectOutdoorBg.setVisibility(View.GONE);
                 mTextViewTimer.setVisibility(View.VISIBLE);
+                clearData();
                 startTimer();
             }
         });
@@ -239,6 +258,7 @@ public class OutdoorAirActivity extends BaseActivity {
                 mLinearLayoutDetectOutdoorBg.setVisibility(View.VISIBLE);
                 mButtonOutdoorStopDetect.setVisibility(View.GONE);
                 mTextViewTimer.setVisibility(View.GONE);
+                clearData();
                 stopTimer();
                 mStartTimer.cancel();
             }
@@ -250,5 +270,34 @@ public class OutdoorAirActivity extends BaseActivity {
         mValueCO2TextView=(TextView) findViewById(R.id.value_co2);
         mDesPM25TextView=(TextView) findViewById(R.id.desp_pm25);
         mDesCO2TextView=(TextView) findViewById(R.id.desp_co2);
+    }
+
+    private void clearData() {
+        mValuePM25List.clear();
+        mValueCO2List.clear();
+        mCountPm25 = 0;
+        mCountCo2 = 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        clearStartTimer();
+        clearStopTimer();
+        if (mServiceConnection!=null){
+            unbindService(mServiceConnection);
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i("---------","OActivityStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.i("---------","OActivityPause");
+        super.onPause();
     }
 }

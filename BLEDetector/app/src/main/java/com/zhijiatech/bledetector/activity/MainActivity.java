@@ -31,10 +31,13 @@ import com.zhijiatech.bledetector.ble.BleUtil;
 import com.zhijiatech.bledetector.constant.MConstants.BLE;
 import com.zhijiatech.bledetector.fragment.LeftMainFragment;
 import com.zhijiatech.bledetector.fragment.RightMainFragment;
+import com.zhijiatech.bledetector.util.BlurUtils;
 import com.zhijiatech.bledetector.view.BatteryStateView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends BaseActivity {
     private static final int REQUEST_ENABLE_BT = 1;
@@ -60,6 +63,11 @@ public class MainActivity extends BaseActivity {
     private int mMaxRssi = -100;
     private BluetoothDevice mBluetoothDeviceConnect;
     private BLEService mBLEService;
+
+    private Timer mPm25Timer;
+    private Timer mCo2Timer;
+
+    private boolean mBooleanGetData = false;
 
     // Device scan callback.
     private BluetoothAdapter.LeScanCallback mLeScanCallback =
@@ -120,16 +128,9 @@ public class MainActivity extends BaseActivity {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mBLEService.readCharacteristic(MainLogic.getInstance().getBluetoothGattCharacteristicPm25());
+                       mBooleanGetData = true;
                     }
-                },10000);
-
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mBLEService.readCharacteristic(MainLogic.getInstance().getBluetoothGattCharacteristicCo2());
-                    }
-                },10500);
+                },5000);
                 break;
 
             case BLE.GET_VALUE_BATTERY:
@@ -140,13 +141,13 @@ public class MainActivity extends BaseActivity {
 
             case BLE.GET_VALUE_PM25:
                 mLeftMainFragment.setNowStatusTextViewInVisible();
-                mLeftMainFragment.refreshNowPm25Value(MainLogic.getInstance().getValuePM25()+"");
+                mLeftMainFragment.refreshNowPm25Value(MainLogic.getInstance().getValuePM25());
                 break;
 
             case BLE.GET_VALUE_CO2:
                 mLeftMainFragment.setNowStatusTextViewInVisible();
                 Log.i("CO2----",MainLogic.getInstance().getValueCO2()+"");
-                mLeftMainFragment.refreshNowCO2Value(MainLogic.getInstance().getValueCO2()+"");
+                mLeftMainFragment.refreshNowCO2Value(MainLogic.getInstance().getValueCO2());
                 break;
 
             case BLE.CONNECT_SUCCESS:
@@ -158,8 +159,47 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
-        // fire an intent to display a dialog asking the user to grant permission to enable it.
+        mPm25Timer = new Timer();
+        mCo2Timer = new Timer();
+
+        mPm25Timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (mBooleanGetData){
+                    mBLEService.readCharacteristic(MainLogic.getInstance().getBluetoothGattCharacteristicPm25());
+                }
+            }
+        },0,500);
+
+        mCo2Timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (mBooleanGetData){
+                    mBLEService.readCharacteristic(MainLogic.getInstance().getBluetoothGattCharacteristicCo2());
+                }
+            }
+        },500,1000);
+    }
+
+    private void initBle() {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        mBooleanGetData = false;
+
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
+
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        mBluetoothDevices = new ArrayList<>();
         if (!mBluetoothAdapter.isEnabled()) {
             if (!mBluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -173,25 +213,6 @@ public class MainActivity extends BaseActivity {
                 }
             },1000);
         }
-    }
-
-    private void initBle() {
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
-        final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-
-        if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
-
-        mBluetoothDevices = new ArrayList<>();
     }
 
     private void scanLeDevice(final boolean enable) {
@@ -273,6 +294,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mTipLayout.setVisibility(View.VISIBLE);
+                if (mViewPager.getCurrentItem() == 0){
+                    BlurUtils.applyBlur(MainActivity.this,mLeftMainFragment.getFrameLayout(),mTipLayout);
+                }else{
+                    BlurUtils.applyBlur(MainActivity.this,mRightMainFragment.getFrameLayout(),mTipLayout);
+                }
             }
         });
 
@@ -332,13 +358,12 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mServiceConnection!=null){
             unbindService(mServiceConnection);
         }
-
     }
 
     @Override
@@ -381,5 +406,29 @@ public class MainActivity extends BaseActivity {
                         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i("---------","MainActivityStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.i("---------","MainActivityPause");
+        clearTimer();
+        super.onPause();
+    }
+
+    private void clearTimer() {
+        if (mPm25Timer != null){
+            mPm25Timer.cancel();
+            mPm25Timer=null;
+        }
+        if (mCo2Timer != null){
+            mCo2Timer.cancel();
+            mCo2Timer=null;
+        }
     }
 }

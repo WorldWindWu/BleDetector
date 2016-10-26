@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.zhijiatech.bledetector.R;
 import com.zhijiatech.bledetector.activity.CaptureActivity;
@@ -20,6 +21,9 @@ import com.zhijiatech.bledetector.view.ReportPopupWindow;
 public class RightMainFragment extends Fragment {
     private Button mDetectTypeButton_1,mDetectTypeButton_2,mDetectTypeButton_3;
     private Button mOutputReportButton;
+
+
+    private FrameLayout mFrameLayout;
 
     private ReportPopupWindow mReportPopupWindow;
 
@@ -63,8 +67,11 @@ public class RightMainFragment extends Fragment {
                 startActivity(intent_4);
             }
         });
-
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.fragment_right);
         return view;
     }
 
+    public FrameLayout getFrameLayout() {
+        return mFrameLayout;
+    }
 }

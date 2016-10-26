@@ -28,8 +28,9 @@ public abstract class BaseActivity extends FragmentActivity implements SlidingPa
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
         register();
-        init();
         initHandler();
+        init();
+
     }
 
     public abstract void init();

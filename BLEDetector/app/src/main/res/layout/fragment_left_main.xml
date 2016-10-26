@@ -2,6 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_left"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.LeftMainFragment">
@@ -11,24 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackBlue">
-
-        <!--电池显示-->
-        <!--<com.zhijiatech.ble.view.BatteryStateView-->
-            <!--android:id="@+id/battery"-->
-            <!--android:layout_width="@dimen/battery_layout_width"-->
-            <!--android:layout_height="@dimen/battery_layout_height"-->
-            <!--android:layout_marginLeft="@dimen/battery_margin_left"-->
-            <!--android:layout_marginTop="@dimen/battery_margin_top"/>-->
-
-        <!--右上角提示-->
-        <!--<ImageButton-->
-            <!--android:id="@+id/tip"-->
-            <!--android:layout_width="@dimen/tip_layout_width"-->
-            <!--android:layout_height="@dimen/tip_layout_height"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="@dimen/tip_margin_right"-->
-            <!--android:layout_marginTop="@dimen/tip_margin_top"-->
-            <!--android:background="@drawable/tip"/>-->
 
         <!--中间的状态显示-->
         <TextView
