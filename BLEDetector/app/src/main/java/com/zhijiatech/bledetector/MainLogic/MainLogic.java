@@ -2,8 +2,6 @@ package com.zhijiatech.bledetector.MainLogic;
 
 import android.bluetooth.BluetoothGattCharacteristic;
 
-import java.util.ArrayList;
-
 /**
  * Created by WUJIAFENG on 2016/8/31.
  */
@@ -35,9 +33,6 @@ public class MainLogic {
 
 
     private int mValueCO2;
-
-    private ArrayList<Integer> valuePM25s;
-    private ArrayList<Integer> valueCO2s;
 
     private int bleBattery;
 

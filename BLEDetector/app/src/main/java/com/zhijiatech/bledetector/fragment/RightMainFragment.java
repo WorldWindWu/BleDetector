@@ -68,6 +68,3 @@ public class RightMainFragment extends Fragment {
     }
 
 }
-//                startActivity(new Intent(getActivity(), NextActivity.class));
-//                mReportPopupWindow = new ReportPopupWindow(getActivity());
-//                mReportPopupWindow.showAtLocation(view, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);

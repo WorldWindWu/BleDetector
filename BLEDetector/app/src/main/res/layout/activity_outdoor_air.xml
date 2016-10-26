@@ -32,29 +32,23 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/detecting_outdoor_back"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/backspace_black"/>
 
-                    <ImageButton
-                        android:id="@+id/detecting_outdoor_back"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/backspace_black"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="32dp"
-                        android:text="室外空气检测"
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        />
-                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:text="室外空气检测"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                />
             </RelativeLayout>
 
             <RelativeLayout

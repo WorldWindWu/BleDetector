@@ -23,4 +23,9 @@ public class MConstants {
         int GET_VALUE_CO2 = 1008;
         int GET_VALUE_BATTERY = 1009;
     }
+
+    public interface REFRESH{
+        int O_START_TIMER = 2001;
+        int O_STOP_TIMER =2002;
+    }
 }
