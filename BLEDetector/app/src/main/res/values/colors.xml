@@ -11,4 +11,10 @@
     <color name="blue_3">#76B9FD</color>
 
     <color name="output_report_text">#2B91FD</color>
+
+    <!--连续检测页面的颜色-->
+    <color name="blue_bottom">#7DBBFD</color>
+    <color name="start_white">#EEFFFFFF</color>
+    <color name="end_white">#22FFFFFF</color>
+    <color name="line_1">#45A2FF</color>
 </resources>

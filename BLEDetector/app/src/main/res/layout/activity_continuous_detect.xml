@@ -4,9 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".activity.ContinuousDetectActivity">
+    tools:context="com.zhijiatech.bledetector.activity.ContinuousDetectActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="943">
+
+        <com.zhijiatech.bledetector.view.View1
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"/>
+        <com.zhijiatech.bledetector.view.CurveLineView
+            android:id="@+id/curve_line"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/continuous_bg_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="338">
+    </RelativeLayout>
 </LinearLayout>
 
