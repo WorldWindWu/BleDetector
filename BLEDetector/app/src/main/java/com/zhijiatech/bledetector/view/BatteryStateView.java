@@ -23,10 +23,6 @@ public class BatteryStateView extends View {
     private Paint mPaint;
     private float mPowerQuantity = 1.0f;
 
-    public float getPowerQuantity() {
-        return mPowerQuantity;
-    }
-
     public void setPowerQuantity(float powerQuantity) {
         mPowerQuantity = powerQuantity;
     }

@@ -33,7 +33,9 @@
             android:launchMode="singleTask"
             android:theme="@style/JK.SwipeBack.Transparent.Theme">
         </activity>
-        <activity android:name=".activity.CoveredAreaActivity">
+        <activity android:name=".activity.ReportActivity" android:launchMode="singleTask"
+                  android:theme="@style/JK.SwipeBack.Transparent.Theme"
+        >
         </activity>
         <activity
             android:name=".activity.NormalDetectActivity"

@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.zhijiatech.bledetector.R;
+
 /**
  * Created by Jiafeng on 2016/10/20.
  */
@@ -23,7 +25,10 @@ public class CurveLineView extends View {
     private Paint mLinePaint;
     private Paint mCircleSPaint;
     private Paint mCircleLPaint;
+    private Paint mTextValuePaint;
+    private Paint mTextTitlePaint;
 
+    private Context mContext;
     private Path mFieldPath;
 
     private float mTotalHeight;
@@ -40,7 +45,7 @@ public class CurveLineView extends View {
     private int mSize;
     private int mMaxValue;
 
-    private int mIndex;
+    private int mIndex = 1;
 
     private int[] mValues = new int[]{1};
 
@@ -70,6 +75,7 @@ public class CurveLineView extends View {
 
     public CurveLineView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         initData();
     }
 
@@ -100,10 +106,20 @@ public class CurveLineView extends View {
         mCircleLPaint.setStyle(Paint.Style.FILL);
         mCircleLPaint.setColor(0x55FFFFFF);
 
+        mTextTitlePaint = new Paint();
+        mTextTitlePaint.setColor(Color.WHITE);
+        mTextTitlePaint.setAntiAlias(true);
+
+        mTextValuePaint = new Paint();
+        mTextValuePaint.setColor(Color.WHITE);
+        mTextValuePaint.setAntiAlias(true);
+
         mFieldPath = new Path();
 
         mSize = mValues.length;
         mMaxValue = mValues[0];
+
+        //mTextValuePaint.setTextSize(mTotalHeight*(80.0f/943.0f));
 
         isMoving = false;
     }
@@ -124,12 +140,12 @@ public class CurveLineView extends View {
 
         // Log.i("------Delta-----",mDeltaX+"---"+mDeltaY);
         mFieldPath.reset();
-        mFieldPath.lineTo(0, mTotalHeight / 2.0f - mTotalHeight / 14.0f);
+        mFieldPath.lineTo(0, mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[0]);
 
         mLines = new float[(mSize + 1) * 4];
 
         mLines[0] = 0;
-        mLines[1] = mTotalHeight / 2.0f - mTotalHeight / 14.0f;
+        mLines[1] = mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[0];
 
         for (int i = 1; i <= mSize; i++) {
             //Log.i("------XY-----",mDeltaX * i+"---"+(mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[i-1]));
@@ -138,7 +154,7 @@ public class CurveLineView extends View {
             mLines[4 * i - 1] = mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[i - 1];
             mLines[4 * i - 0] = mDeltaX * i;
             mLines[4 * i + 1] = mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[i - 1];
-            canvas.drawCircle(mDeltaX * i,mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[i - 1],4,mCurvePaint);
+         //   canvas.drawCircle(mDeltaX * i,mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[i - 1],4,mCurvePaint);
         }
 
         mLines[4 * mSize + 2] = mTotalWidth;
@@ -146,7 +162,7 @@ public class CurveLineView extends View {
         mFieldPath.lineTo(mTotalWidth, mTotalHeight - mTotalHeight / 14.0f - mDeltaY * mValues[mSize - 1]);
         mFieldPath.lineTo(mTotalWidth, mTotalHeight - mTotalHeight / 14.0f);
         mFieldPath.lineTo(0, mTotalHeight - mTotalHeight / 14.0f);
-        mFieldPath.lineTo(0, mTotalHeight / 2.0f - mTotalHeight / 14.0f);
+        mFieldPath.lineTo(0, mTotalHeight / 2.0f - mTotalHeight / 14.0f- mDeltaY * mValues[0]);
 
         if (isMoving) {
             mLineCircleX = (mLines[mIndex * 4 + 0]);
@@ -154,6 +170,10 @@ public class CurveLineView extends View {
         } else {
             mLineCircleX = (mLines[mSize * 4 + 0]);
             mLineCircleY = (mLines[mSize * 4 + 1]);
+        }
+
+        if (!isMoving){
+            mIndex = mSize;
         }
     }
 
@@ -189,6 +209,10 @@ public class CurveLineView extends View {
         canvas.drawCircle(getLineCircleX(), getLineCircleY(), 20, mCircleSPaint);
         canvas.drawCircle(getLineCircleX(), getLineCircleY(), 40, mCircleLPaint);
         canvas.drawLine(getLineCircleX(), 0, getLineCircleX(), mTotalHeight - mTotalHeight / 14.0f, mLinePaint);
+        mTextValuePaint.setTextSize(mTotalHeight*(80.0f/943.0f));
+        mTextTitlePaint.setTextSize(mTotalHeight*(28.0f/943.0f));
+        canvas.drawText(mValues[mIndex - 1]+"",100,mTotalHeight*(210.0f/943.0f),mTextValuePaint);
+        canvas.drawText(mContext.getResources().getString(R.string.unit_pm),320,mTotalHeight*(210.0f/943.0f),mTextTitlePaint);
     }
 
     @Override
@@ -199,7 +223,7 @@ public class CurveLineView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.d(TAG, "---onTouchEvent action:ACTION_DOWN");
-                if (Math.abs(mLineCircleX - x) < mDeltaX){
+                if (Math.abs(mLineCircleX - x) < 40){
                     isMoving = true;
                     mIndex = mSize;
                 }
@@ -211,13 +235,17 @@ public class CurveLineView extends View {
                 mIndex = (int)(x / mDeltaX);
                 if (mIndex > mSize){
                     mIndex = mSize;
+                }else if (mIndex < 1){
+                    mIndex = 1;
                 }
                 invalidate();
                 break;
 
             case MotionEvent.ACTION_UP:
                 Log.d(TAG, "---onTouchEvent action:ACTION_UP");
+                if (isMoving)  mIndex = mSize;
                 isMoving = false;
+
                 invalidate();
                 break;
 

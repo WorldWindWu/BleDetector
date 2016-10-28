@@ -78,9 +78,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
+    public void init() {
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_capture);
@@ -100,11 +98,6 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         animation.setRepeatCount(-1);
         animation.setRepeatMode(Animation.RESTART);
         scanLine.startAnimation(animation);
-    }
-
-    @Override
-    public void init() {
-
     }
 
     @Override
@@ -199,13 +192,16 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
 
-        Intent resultIntent = new Intent();
-        bundle.putInt("width", mCropRect.width());
-        bundle.putInt("height", mCropRect.height());
-        bundle.putString("result", rawResult.getText());
-        resultIntent.putExtras(bundle);
-        this.setResult(RESULT_OK, resultIntent);
-        CaptureActivity.this.finish();
+//        Intent resultIntent = new Intent();
+//        bundle.putInt("width", mCropRect.width());
+//        bundle.putInt("height", mCropRect.height());
+//        bundle.putString("result", rawResult.getText());
+//        resultIntent.putExtras(bundle);
+//        this.setResult(RESULT_OK, resultIntent);
+//        CaptureActivity.this.finish();
+        Log.i("result---",rawResult.getText());
+        Intent intent = new Intent(this,ReportActivity.class);
+        startActivity(intent);
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

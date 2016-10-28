@@ -12,22 +12,78 @@
         android:layout_height="0dp"
         android:layout_weight="943">
 
-        <com.zhijiatech.bledetector.view.View1
+        <com.zhijiatech.bledetector.view.ContinuousBgView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"/>
         <com.zhijiatech.bledetector.view.CurveLineView
             android:id="@+id/curve_line"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/continuous_bg_gradient"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/continuous_bg_gradient"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <ImageButton
+                android:id="@+id/iv_continuous_detect_finish_back_arrow"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/backspace_white"/>
+
+            <TextView
+                android:id="@+id/tv_continuous_detect_finish_type_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:text="PM2.5持续检测"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+            />
+
+            <Button
+                android:id="@+id/outdoor_redo_continuous_detect"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/corner_rect"
+                android:text="重测"
+                android:textColor="@color/colorBackBlue"
+                android:textSize="23sp"
+            />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="338">
+
+        <Button
+            android:id="@+id/start_continuous_detect"
+            android:text="开始"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/continuous_start_button_bg"/>
+        <!---->
+        <com.zhijiatech.bledetector.view.TimerView
+            android:id="@+id/continuous_detect_timer"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 </LinearLayout>
 

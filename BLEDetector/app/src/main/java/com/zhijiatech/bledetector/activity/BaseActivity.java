@@ -33,6 +33,11 @@ public abstract class BaseActivity extends FragmentActivity implements SlidingPa
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     public abstract void init();
     public abstract void register();
 

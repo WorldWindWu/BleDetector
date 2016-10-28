@@ -54,6 +54,6 @@
     <string name="alert_message_exit_ok">确定</string>
     <string name="alert_message_exit_cancel">取消</string>
 
-
-
+    <string name="unit_pm">μg/m³</string>
+    <string name="unit_area">㎡</string>
 </resources>

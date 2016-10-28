@@ -27,7 +27,7 @@
             android:layout_height="400dp"
             android:layout_below="@id/capture_mask_top"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/qr_bg">
+            android:background="@drawable/field_capture_qr_code">
 
             <ImageView
                 android:id="@+id/capture_scan_line"
@@ -36,9 +36,20 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/scan_line"/>
+                android:background="@drawable/line_scan"/>
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:text="请扫描新风机上的二维码"
+            android:layout_below="@id/capture_crop_view"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+        />
 
         <ImageView
             android:id="@+id/capture_mask_bottom"
@@ -72,8 +83,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageButton
-            android:id="@+id/detecting_outdoor_back"
+            android:id="@+id/scan_qr_back"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="10dp"
@@ -85,10 +97,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="32dp"
-            android:text="室外空气检测"
+            android:text="识别机型"
             android:textColor="@android:color/white"
             android:textSize="30sp"
-            />
+        />
     </RelativeLayout>
-
 </FrameLayout>

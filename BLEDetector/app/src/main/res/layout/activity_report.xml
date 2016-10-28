@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.CoveredAreaActivity">
+    tools:context=".activity.ReportActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,6 +52,21 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/corner_rect"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:text="@string/unit_area"
+            android:textColor="@android:color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/editText"
+            android:layout_alignBottom="@id/editText"
+            android:layout_marginLeft="18dp"
+        />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -68,9 +83,10 @@
             android:rowCount="3"
             android:columnCount="3"
             >
-
             <RelativeLayout>
                 <Button
+                     
+                    android:id="@+id/default_value_8"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
@@ -82,10 +98,33 @@
 
             <RelativeLayout>
                 <Button
+                    android:id="@+id/default_value_10"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="10㎡"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    android:layout_height="50dp"/>
+            </RelativeLayout>
+            <RelativeLayout>
+                <Button
+                    android:id="@+id/default_value_15"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/corner_rect"
+                    android:layout_width="150dp"
+                    android:text="15㎡"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    android:layout_height="50dp"/>
+            </RelativeLayout>
+            <RelativeLayout>
+                <Button
+                    android:id="@+id/default_value_20"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/corner_rect"
+                    android:layout_width="150dp"
+                    android:text="20㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
@@ -93,49 +132,32 @@
             <RelativeLayout>
                 <Button
                     android:layout_margin="20dp"
+                    android:id="@+id/default_value_30"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="30㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
             </RelativeLayout>
             <RelativeLayout>
                 <Button
+                    android:id="@+id/default_value_45"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="45㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
             </RelativeLayout>
             <RelativeLayout>
                 <Button
+                    android:id="@+id/default_value_90"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp"
-                    android:layout_height="50dp"/>
-            </RelativeLayout>
-            <RelativeLayout>
-                <Button
-                    android:layout_margin="20dp"
-                    android:background="@drawable/corner_rect"
-                    android:layout_width="150dp"
-                    android:text="8㎡"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp"
-                    android:layout_height="50dp"/>
-            </RelativeLayout>
-            <RelativeLayout>
-                <Button
-                    android:layout_margin="20dp"
-                    android:background="@drawable/corner_rect"
-                    android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="90㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
@@ -143,20 +165,22 @@
 
             <RelativeLayout>
                 <Button
+                    android:id="@+id/default_value_110"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="110㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
             </RelativeLayout>
             <RelativeLayout>
                 <Button
+                    android:id="@+id/default_value_140"
                     android:layout_margin="20dp"
                     android:background="@drawable/corner_rect"
                     android:layout_width="150dp"
-                    android:text="8㎡"
+                    android:text="140㎡"
                     android:textColor="@android:color/black"
                     android:textSize="30sp"
                     android:layout_height="50dp"/>
