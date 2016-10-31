@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,6 +50,9 @@ public class NormalDetectActivity extends BaseActivity {
     private TextView mTvDesPm25;
     private TextView mTvDesCo2;
     private TextView mTvPreDetectTypeName,mTvDetectFinishTypeName;
+
+    private ImageView mImageViewPreBg,mImageViewFinishBg;
+    private TextView mTextViewTip1,mTextViewTip2;
 
     private BLEService mBLEService;
 
@@ -126,7 +130,7 @@ public class NormalDetectActivity extends BaseActivity {
                     }
 
                     mTimerWave.setWaveHeight(mDeltaHeight * (mWaveHeightIndex++));
-                    mTvTimer.setText("" + mWaveHeightIndex / 100);
+                    mTvTimer.setText("" + (int)(30.0f - mWaveHeightIndex / 100.0f));
                 } else {
                     clearStartTimer();
                     calculateValue();
@@ -205,16 +209,30 @@ public class NormalDetectActivity extends BaseActivity {
     }
 
     private void initComponents() {
+        mTextViewTip1 = (TextView) findViewById(R.id.tv_pre_normal_detect_tip1);
+        mTextViewTip2 = (TextView) findViewById(R.id.tv_pre_normal_detect_tip2);
+
+        mImageViewPreBg = (ImageView) findViewById(R.id.iv_pre_normal_detect_bg);
+        mImageViewFinishBg = (ImageView) findViewById(R.id.iv_normal_detect_finish_center_bg);
+
         mTvPreDetectTypeName = (TextView) findViewById(R.id.tv_pre_normal_detect_type_name);
         mTvDetectFinishTypeName = (TextView) findViewById(R.id.tv_normal_detect_finish_type_name);
 
         if (getResources().getString(R.string.detect_type_o_en).equals(mDetectType)){
             mTvPreDetectTypeName.setText(getResources().getString(R.string.detect_type_1));
             mTvDetectFinishTypeName.setText(getResources().getString(R.string.detect_type_1));
+            mImageViewPreBg.setImageResource(R.drawable.outdoor);
+            mImageViewFinishBg.setImageResource(R.drawable.outdoor_finished);
+            mTextViewTip1.setText(getResources().getString(R.string.detect_type_1_tip_1));
+            mTextViewTip2.setText(getResources().getString(R.string.detect_type_1_tip_2));
         }
         else if (getResources().getString(R.string.detect_type_i_en).equals(mDetectType)){
             mTvPreDetectTypeName.setText(getResources().getString(R.string.detect_type_2));
             mTvDetectFinishTypeName.setText(getResources().getString(R.string.detect_type_2));
+            mImageViewPreBg.setImageResource(R.drawable.indoor);
+            mImageViewFinishBg.setImageResource(R.drawable.indoor_finished);
+            mTextViewTip1.setText(getResources().getString(R.string.detect_type_2_tip_1));
+            mTextViewTip2.setText(getResources().getString(R.string.detect_type_2_tip_2));
         }
         mIbBackArrowPre = (ImageButton) findViewById(R.id.ib_normal_detect_back_arrow);
         mIbBackArrowFinish = (ImageButton) findViewById(R.id.iv_normal_detect_finish_back_arrow);
@@ -280,6 +298,8 @@ public class NormalDetectActivity extends BaseActivity {
         mTvValueCo2 =(TextView) findViewById(R.id.tv_normal_detect_finish_value_co2);
         mTvDesPm25 =(TextView) findViewById(R.id.tv_normal_detect_finish_description_pm25);
         mTvDesCo2 =(TextView) findViewById(R.id.tv_normal_detect_finish_description_co2);
+
+
     }
 
     private void clearData() {

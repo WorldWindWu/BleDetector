@@ -25,6 +25,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -66,6 +67,8 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
     private RelativeLayout scanCropView;
     private ImageView scanLine;
 
+    private ImageView mImageViewBack;
+
     private Rect mCropRect = null;
     private boolean isHasSurface = false;
 
@@ -87,6 +90,14 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
         scanLine = (ImageView) findViewById(R.id.capture_scan_line);
+        mImageViewBack = (ImageView) findViewById(R.id.scan_qr_back);
+
+        mImageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
@@ -202,6 +213,7 @@ public final class CaptureActivity extends BaseActivity implements SurfaceHolder
         Log.i("result---",rawResult.getText());
         Intent intent = new Intent(this,ReportActivity.class);
         startActivity(intent);
+        CaptureActivity.this.finish();
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

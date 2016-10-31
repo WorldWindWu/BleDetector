@@ -43,9 +43,13 @@
     <string name="detect_type_2">净化效率检测</string>
     <string name="detect_type_3">PM2.5持续检测</string>
 
+    <string name="detect_type_1_tip_1">检测前</string>
+    <string name="detect_type_1_tip_2">请把检测仪放到室外</string>
+    <string name="detect_type_2_tip_1">检测前，请将检测仪的进风口</string>
+    <string name="detect_type_2_tip_2">正对净化器的出风口</string>
+
     <string name="detect_type_o_en">outdoor</string>
     <string name="detect_type_i_en">indoor</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -28,15 +28,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.CaptureActivity"
             android:launchMode="singleTask"
             android:theme="@style/JK.SwipeBack.Transparent.Theme">
         </activity>
-        <activity android:name=".activity.ReportActivity" android:launchMode="singleTask"
-                  android:theme="@style/JK.SwipeBack.Transparent.Theme"
-        >
+
+        <activity
+            android:name=".activity.ReportActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/JK.SwipeBack.Transparent.Theme">
+
         </activity>
+
         <activity
             android:name=".activity.NormalDetectActivity"
             android:launchMode="singleTask"
@@ -46,9 +51,11 @@
         <service
             android:name=".ble.BLEService"
             android:enabled="true"/>
-        <activity android:name=".activity.ContinuousDetectActivity"
-                  android:launchMode="singleTask"
-                  android:theme="@style/JK.SwipeBack.Transparent.Theme">
+
+        <activity
+            android:name=".activity.ContinuousDetectActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/JK.SwipeBack.Transparent.Theme">
         </activity>
     </application>
 

@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.widget.Toast.makeText;
+
 public class MainActivity extends BaseActivity {
     private static final int REQUEST_ENABLE_BT = 1;
 
@@ -183,7 +185,7 @@ public class MainActivity extends BaseActivity {
 
     private void initBle() {
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
+            makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -194,7 +196,7 @@ public class MainActivity extends BaseActivity {
         mBluetoothAdapter = bluetoothManager.getAdapter();
 
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
+            makeText(this, "本机不支持蓝牙！", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -223,7 +225,12 @@ public class MainActivity extends BaseActivity {
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                    connectBleDevice();
+                    if (mBluetoothDeviceConnect == null){
+                        Toast.makeText(MainActivity.this, "当前未搜索到指定设备！", Toast.LENGTH_LONG).show();
+                    }else{
+                        connectBleDevice();
+                    }
+
                 }
             }, SCAN_PERIOD);
 

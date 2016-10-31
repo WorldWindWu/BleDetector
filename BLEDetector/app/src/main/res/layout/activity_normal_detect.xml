@@ -125,7 +125,7 @@
             android:id="@+id/bt_normal_detect_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/button_ripple_1"
+            android:background="@drawable/button_ripple_blue"
             android:text="检测"
             android:textSize="25sp"/>
 

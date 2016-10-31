@@ -18,7 +18,7 @@ public class ReportPopupWindow extends PopupWindow {
     private Button mCloseReport;
     private View mView;
 
-    public ReportPopupWindow(Activity context) {
+    public ReportPopupWindow(final Activity context) {
         super(context);
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -30,6 +30,7 @@ public class ReportPopupWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
                 dismiss();
+                context.onBackPressed();
             }
         });
 

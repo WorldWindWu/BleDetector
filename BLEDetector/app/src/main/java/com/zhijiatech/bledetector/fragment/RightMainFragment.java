@@ -31,7 +31,7 @@ public class RightMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view =  inflater.inflate(R.layout.fragment_right_amin, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_right_main, container, false);
         mDetectTypeButton_1 = (Button) view.findViewById(R.id.detect_type_1);
         mDetectTypeButton_2 = (Button) view.findViewById(R.id.detect_type_2);
         mDetectTypeButton_3 = (Button) view.findViewById(R.id.detect_type_3);
@@ -70,6 +70,7 @@ public class RightMainFragment extends Fragment {
                 startActivity(intent_4);
             }
         });
+
         mFrameLayout = (FrameLayout) view.findViewById(R.id.fragment_right);
         return view;
     }
